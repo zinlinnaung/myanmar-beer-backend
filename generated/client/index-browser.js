@@ -105,15 +105,70 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UsersScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password',
-  role: 'role',
-  is_active: 'is_active',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+exports.Prisma.Tbl_gtransScalarFieldEnum = {
+  gtid: 'gtid',
+  olcity: 'olcity',
+  oltsp: 'oltsp',
+  olname: 'olname',
+  gcarange: 'gcarange',
+  gcumobile: 'gcumobile',
+  gcwinitem: 'gcwinitem',
+  sa: 'sa',
+  sb: 'sb',
+  sc: 'sc',
+  gstatus: 'gstatus',
+  gdt: 'gdt'
+};
+
+exports.Prisma.Tbl_logsScalarFieldEnum = {
+  logid: 'logid',
+  logdt: 'logdt',
+  logtype: 'logtype',
+  logref: 'logref',
+  logtext: 'logtext'
+};
+
+exports.Prisma.Tbl_outletScalarFieldEnum = {
+  olid: 'olid',
+  olregion: 'olregion',
+  olcity: 'olcity',
+  oltsp: 'oltsp',
+  olname: 'olname',
+  oladd: 'oladd',
+  olwratio: 'olwratio',
+  olcreated: 'olcreated'
+};
+
+exports.Prisma.Tbl_salepersonScalarFieldEnum = {
+  spid: 'spid',
+  spfullname: 'spfullname',
+  spmobile: 'spmobile',
+  spcreated: 'spcreated',
+  spstatus: 'spstatus'
+};
+
+exports.Prisma.Tbl_settingsScalarFieldEnum = {
+  setid: 'setid',
+  settitle: 'settitle',
+  setvalue: 'setvalue'
+};
+
+exports.Prisma.Tbl_surveyScalarFieldEnum = {
+  svid: 'svid',
+  svq: 'svq',
+  sva1: 'sva1',
+  sva2: 'sva2',
+  sva3: 'sva3'
+};
+
+exports.Prisma.Tbl_sysuserScalarFieldEnum = {
+  sysuid: 'sysuid',
+  sysufulln: 'sysufulln',
+  sysumobile: 'sysumobile',
+  sysuemail: 'sysuemail',
+  sysuauth: 'sysuauth',
+  sysutype: 'sysutype',
+  sysucreated: 'sysucreated'
 };
 
 exports.Prisma.SortOrder = {
@@ -125,13 +180,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.Role = {
-  User: 'User',
-  Admin: 'Admin'
-};
+
 
 exports.Prisma.ModelName = {
-  Users: 'Users'
+  tbl_gtrans: 'tbl_gtrans',
+  tbl_logs: 'tbl_logs',
+  tbl_outlet: 'tbl_outlet',
+  tbl_saleperson: 'tbl_saleperson',
+  tbl_settings: 'tbl_settings',
+  tbl_survey: 'tbl_survey',
+  tbl_sysuser: 'tbl_sysuser'
 };
 
 /**

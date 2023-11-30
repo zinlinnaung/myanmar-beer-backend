@@ -23,7 +23,7 @@ model tbl_gtrans {
   gdt       DateTime @default(now()) @db.DateTime(0)
 }
 
-model tbl_logs {
+model tbl_logs {//R
   logid   Int       @id @default(autoincrement())
   logdt   DateTime? @db.DateTime(0)
   logtype String?   @db.VarChar(100)
@@ -31,7 +31,7 @@ model tbl_logs {
   logtext String?   @db.Text
 }
 
-model tbl_outlet {
+model tbl_outlet {//R
   olid      Int       @id @default(autoincrement())
   olregion  String?   @db.VarChar(100)
   olcity    String?   @db.VarChar(100)
@@ -42,15 +42,15 @@ model tbl_outlet {
   olcreated DateTime? @db.DateTime(0)
 }
 
-model tbl_saleperson {
+model tbl_saleperson {//CRUD
   spid       Int       @id @default(autoincrement())
   spfullname String?   @db.VarChar(200)
-  spmobile   String?   @db.VarChar(20)
+  spmobile   String?   @db.VarChar(20) @unique
   spcreated  DateTime? @db.DateTime(0)
   spstatus   String?   @db.VarChar(10)
 }
 
-model tbl_settings {
+model tbl_settings {//CR
   setid    Int     @id @default(autoincrement())
   settitle String? @db.VarChar(200)
   setvalue String? @db.LongText
@@ -72,4 +72,20 @@ model tbl_sysuser {
   sysuauth    String?   @db.VarChar(20)
   sysutype    String?   @db.VarChar(50)
   sysucreated DateTime? @db.DateTime(0)
+}
+
+model Users {
+  id         Int      @id @default(autoincrement())
+  name       String?
+  email      String   @unique
+  password   String
+  role       Role     @default(Admin)
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+enum Role {
+  User
+  Admin
 }

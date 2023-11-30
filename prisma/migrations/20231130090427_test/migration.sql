@@ -49,6 +49,7 @@ CREATE TABLE `tbl_saleperson` (
     `spcreated` DATETIME(0) NULL,
     `spstatus` VARCHAR(10) NULL,
 
+    UNIQUE INDEX `tbl_saleperson_spmobile_key`(`spmobile`),
     PRIMARY KEY (`spid`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

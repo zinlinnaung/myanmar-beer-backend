@@ -88,8 +88,4 @@ model Users {
 enum Role {
   User
   Admin
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4dfdf30 (feat: customer_and_logs_and_user)

@@ -171,6 +171,17 @@ exports.Prisma.Tbl_sysuserScalarFieldEnum = {
   sysucreated: 'sysucreated'
 };
 
+exports.Prisma.UsersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  role: 'role',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -180,7 +191,10 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Role = {
+  User: 'User',
+  Admin: 'Admin'
+};
 
 exports.Prisma.ModelName = {
   tbl_gtrans: 'tbl_gtrans',
@@ -189,7 +203,8 @@ exports.Prisma.ModelName = {
   tbl_saleperson: 'tbl_saleperson',
   tbl_settings: 'tbl_settings',
   tbl_survey: 'tbl_survey',
-  tbl_sysuser: 'tbl_sysuser'
+  tbl_sysuser: 'tbl_sysuser',
+  Users: 'Users'
 };
 
 /**

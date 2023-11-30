@@ -28,4 +28,31 @@ export class CustomerService {
     });
     return customers;
   }
+
+  async getCityCount(): Promise<{ olcity: string; count: number }[]> {
+    const cityCounts = await this.prisma.tbl_gtrans.groupBy({
+      by: ['olcity'],
+      _count: true,
+    });
+
+    return cityCounts.map((result) => ({
+      olcity: result.olcity,
+      count: result._count,
+    }));
+  }
+
+  async getWinItemCount(): Promise<
+    { gcwinitem: string; gcumobile: string; count: number }[]
+  > {
+    const winItemCount = await this.prisma.tbl_gtrans.groupBy({
+      by: ['gcwinitem', 'gcumobile'],
+      _count: true,
+    });
+
+    return winItemCount.map((result) => ({
+      gcwinitem: result.gcwinitem,
+      gcumobile: result.gcumobile,
+      count: result._count,
+    }));
+  }
 }

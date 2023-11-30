@@ -31,4 +31,20 @@ export class CustomerController {
   async get_all_customer_internal() {
     return this.customerService.get_all_customer_internal();
   }
+
+  @Get('/i/city-count')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getCityCount() {
+    return this.customerService.getCityCount();
+  }
+
+  @Get('/i/winitem-count')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getWinItemCount() {
+    return this.customerService.getWinItemCount();
+  }
 }

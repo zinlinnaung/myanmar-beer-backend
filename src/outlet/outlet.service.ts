@@ -23,4 +23,18 @@ export class OutletService {
     });
     return logs;
   }
+
+  async getUniqueCities() {
+    return this.prisma.$queryRaw`SELECT olcity FROM tbl_outlet GROUP BY olcity`;
+  }
+
+  async getTspByCity(city: string) {
+    return this.prisma
+      .$queryRaw`SELECT oltsp FROM tbl_outlet WHERE olcity = ${city} GROUP BY oltsp`;
+  }
+
+  async getNamesByTsp(tsp: string) {
+    return this.prisma
+      .$queryRaw`SELECT olname FROM tbl_outlet WHERE oltsp = ${tsp} GROUP BY olname`;
+  }
 }

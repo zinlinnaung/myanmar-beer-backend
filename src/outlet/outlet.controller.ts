@@ -31,4 +31,28 @@ export class OutletController {
   async get_all_outlets() {
     return this.outletService.get_all_outlets();
   }
+
+  @Get('/cities')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getUniqueCities() {
+    return this.outletService.getUniqueCities();
+  }
+
+  @Get('/tsp/:city')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getTspByCity(@Param('city') city: string) {
+    return this.outletService.getTspByCity(city);
+  }
+
+  @Get('/names/:tsp')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getNamesByTsp(@Param('tsp') tsp: string) {
+    return this.outletService.getNamesByTsp(tsp);
+  }
 }

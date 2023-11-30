@@ -24,6 +24,7 @@ import { SettingModule } from './setting/setting.module';
     OutletModule,
     CustomerModule,
     LogsModule,
+    OutletModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AtGuard }],

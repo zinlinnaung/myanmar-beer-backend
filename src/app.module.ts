@@ -3,6 +3,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { CustomerModule } from './customer/customer.module';
 import { LogsModule } from './log/logs.module';
+import { OutletModule } from './outlet/outlet.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { APP_GUARD } from '@nestjs/core';
@@ -20,6 +21,7 @@ import { SettingModule } from './setting/setting.module';
     SettingModule,
     CustomerModule,
     LogsModule,
+    OutletModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AtGuard }],

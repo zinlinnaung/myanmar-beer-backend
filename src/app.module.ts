@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
+import { CustomerModule } from './customer/customer.module';
+import { LogsModule } from './log/logs.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { APP_GUARD } from '@nestjs/core';
@@ -16,6 +18,8 @@ import { SettingModule } from './setting/setting.module';
     AuthenticationModule,
     SalepersonModule,
     SettingModule,
+    CustomerModule,
+    LogsModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AtGuard }],

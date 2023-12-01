@@ -41,17 +41,14 @@ export class CustomerService {
     }));
   }
 
-  async getWinItemCount(): Promise<
-    { gcwinitem: string; gcumobile: string; count: number }[]
-  > {
+  async getWinItemCount(): Promise<{ gcwinitem: string; count: number }[]> {
     const winItemCount = await this.prisma.tbl_gtrans.groupBy({
-      by: ['gcwinitem', 'gcumobile'],
+      by: ['gcwinitem'],
       _count: true,
     });
 
     return winItemCount.map((result) => ({
       gcwinitem: result.gcwinitem,
-      gcumobile: result.gcumobile,
       count: result._count,
     }));
   }

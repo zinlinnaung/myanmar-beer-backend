@@ -35,6 +35,7 @@ export class CustomerController {
 
   @Get('/i/count/list')
   @HttpCode(HttpStatus.OK)
+  //hello
   // @UseGuards(InternalGuard)
   @Public()
   @ApiBearerAuth()

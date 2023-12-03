@@ -26,10 +26,48 @@ export class CustomerController {
 
   @Get('/i/list')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(InternalGuard)
+  // @UseGuards(InternalGuard)
+  @Public()
   @ApiBearerAuth()
   async get_all_customer_internal() {
     return this.customerService.get_all_customer_internal();
+  }
+
+  @Get('/i/date-range')
+  @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  @Public()
+  @ApiBearerAuth()
+  async getCustomerByDateRange(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    // Parse the string dates into Date objects (you may need to adjust the format based on your frontend)
+    const parsedStartDate = startDate ? new Date(startDate) : null;
+    const parsedEndDate = endDate ? new Date(endDate) : null;
+
+    return this.customerService.getCustomerByDateRange(
+      parsedStartDate,
+      parsedEndDate,
+    );
+  }
+  @Get('/i/count/date-range')
+  @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  @Public()
+  @ApiBearerAuth()
+  async getCustomerCountByDateRange(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    // Parse the string dates into Date objects (you may need to adjust the format based on your frontend)
+    const parsedStartDate = startDate ? new Date(startDate) : null;
+    const parsedEndDate = endDate ? new Date(endDate) : null;
+
+    return this.customerService.getCustomerCountByDateRange(
+      parsedStartDate,
+      parsedEndDate,
+    );
   }
 
   @Get('/i/city-count')

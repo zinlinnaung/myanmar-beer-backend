@@ -56,6 +56,29 @@ export class CustomerService {
     return count;
   }
 
+  async get_all_success_count() {
+    const count = await this.prisma.tbl_gtrans.count({
+      where: {
+        gstatus: 'success',
+      },
+      orderBy: {
+        gdt: 'desc',
+      },
+    });
+    return count;
+  }
+  async get_all_fail_count() {
+    const count = await this.prisma.tbl_gtrans.count({
+      where: {
+        gstatus: 'fail',
+      },
+      orderBy: {
+        gdt: 'desc',
+      },
+    });
+    return count;
+  }
+
   async get_all_customer_internal() {
     const customers = await this.prisma.tbl_gtrans.findMany({
       select: {

@@ -32,6 +32,24 @@ export class CustomerController {
   async get_all_customer_internal() {
     return this.customerService.get_all_customer_internal();
   }
+  @Get('/i/count/success')
+  @HttpCode(HttpStatus.OK)
+  //hello
+  // @UseGuards(InternalGuard)
+  @Public()
+  @ApiBearerAuth()
+  async get_all_success_count() {
+    return this.customerService.get_all_success_count();
+  }
+  @Get('/i/count/failed')
+  @HttpCode(HttpStatus.OK)
+  //hello
+  // @UseGuards(InternalGuard)
+  @Public()
+  @ApiBearerAuth()
+  async get_all_failed_count() {
+    return this.customerService.get_all_fail_count();
+  }
 
   @Get('/i/count/list')
   @HttpCode(HttpStatus.OK)

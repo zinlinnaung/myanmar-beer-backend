@@ -70,7 +70,7 @@ export class CustomerService {
   async get_all_fail_count() {
     const count = await this.prisma.tbl_gtrans.count({
       where: {
-        gstatus: 'fail',
+        gstatus: 'failed',
       },
       orderBy: {
         gdt: 'desc',

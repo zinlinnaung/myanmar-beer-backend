@@ -33,6 +33,15 @@ export class CustomerController {
     return this.customerService.get_all_customer_internal();
   }
 
+  @Get('/i/count/list')
+  @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  @Public()
+  @ApiBearerAuth()
+  async get_all_customer_count() {
+    return this.customerService.get_all_customer_count();
+  }
+
   @Get('/i/date-range')
   @HttpCode(HttpStatus.OK)
   // @UseGuards(InternalGuard)

@@ -47,6 +47,15 @@ export class CustomerService {
     // return customers;
   }
 
+  async get_all_customer_count() {
+    const count = await this.prisma.tbl_gtrans.count({
+      orderBy: {
+        gdt: 'desc',
+      },
+    });
+    return count;
+  }
+
   async get_all_customer_internal() {
     const customers = await this.prisma.tbl_gtrans.findMany({
       select: {

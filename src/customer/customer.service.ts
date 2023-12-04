@@ -11,14 +11,23 @@ export class CustomerService {
   // async get_all_announcement(): Promise<Announcement[]> {
   //   return this.prisma.announcement.findMany();
   // }
-  async getCustomerByDateRange(startDate: Date, endDate: Date) {
-    const customers = await this.prisma.tbl_gtrans.findMany({
-      where: {
+  async getCustomerByDateRange(startDate: Date | null, endDate: Date | null) {
+    let whereCondition: { gdt?: { gte?: string; lte?: string } } = {};
+
+    if (startDate !== null && endDate !== null) {
+      const adjustedEndDate = new Date(endDate);
+      adjustedEndDate.setHours(23, 59, 59, 999);
+
+      whereCondition = {
         gdt: {
-          gte: startDate.toISOString(), // Convert to ISO string for comparison
-          lte: endDate.toISOString(), // Convert to ISO string for comparison
+          gte: startDate.toISOString(),
+          lte: adjustedEndDate.toISOString(),
         },
-      },
+      };
+    }
+
+    const customers = await this.prisma.tbl_gtrans.findMany({
+      where: whereCondition,
       select: {
         gtid: true,
         olname: true,
@@ -31,20 +40,33 @@ export class CustomerService {
         gdt: 'desc',
       },
     });
+
     return customers;
-    // return customers;
   }
-  async getCustomerCountByDateRange(startDate: Date, endDate: Date) {
-    const count = await this.prisma.tbl_gtrans.count({
-      where: {
+
+  async getCustomerCountByDateRange(
+    startDate: Date | null,
+    endDate: Date | null,
+  ): Promise<number> {
+    let whereCondition: { gdt?: { gte?: string; lte?: string } } = {};
+
+    if (startDate !== null && endDate !== null) {
+      const adjustedEndDate = new Date(endDate);
+      adjustedEndDate.setHours(23, 59, 59, 999);
+
+      whereCondition = {
         gdt: {
-          gte: startDate,
-          lte: endDate,
+          gte: startDate.toISOString(),
+          lte: adjustedEndDate.toISOString(),
         },
-      },
+      };
+    }
+
+    const count = await this.prisma.tbl_gtrans.count({
+      where: whereCondition,
     });
+
     return count;
-    // return customers;
   }
 
   async get_all_customer_count() {
@@ -97,21 +119,33 @@ export class CustomerService {
   }
 
   async getCityCountByDateRange(
-    startDate: Date,
-    endDate: Date,
-  ): Promise<number> {
+    startDate: Date | null,
+    endDate: Date | null,
+  ): Promise<{ olcity: string; count: number }[]> {
+    let whereCondition: { gdt?: { gte?: string; lte?: string } } = {};
+
+    if (startDate !== null && endDate !== null) {
+      const adjustedEndDate = new Date(endDate);
+      adjustedEndDate.setHours(23, 59, 59, 999);
+
+      whereCondition = {
+        gdt: {
+          gte: startDate.toISOString(),
+          lte: adjustedEndDate.toISOString(),
+        },
+      };
+    }
+
     const cityCounts = await this.prisma.tbl_gtrans.groupBy({
       by: ['olcity'],
       _count: true,
-      where: {
-        gdt: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
+      where: whereCondition,
     });
 
-    return cityCounts.length;
+    return cityCounts.map((result) => ({
+      olcity: result.olcity,
+      count: result._count,
+    }));
   }
 
   async getCityCount(): Promise<{ olcity: string; count: number }[]> {
@@ -140,18 +174,30 @@ export class CustomerService {
   async getWinItemCountByDateRange(
     startDate: Date,
     endDate: Date,
-  ): Promise<number> {
-    const winItemCount = await this.prisma.tbl_gtrans.groupBy({
+  ): Promise<{ gcwinitem: string; count: number }[]> {
+    let whereCondition: { gdt?: { gte?: string; lte?: string } } = {};
+
+    if (startDate !== null && endDate !== null) {
+      const adjustedEndDate = new Date(endDate);
+      adjustedEndDate.setHours(23, 59, 59, 999);
+
+      whereCondition = {
+        gdt: {
+          gte: startDate.toISOString(),
+          lte: adjustedEndDate.toISOString(),
+        },
+      };
+    }
+
+    const cityCounts = await this.prisma.tbl_gtrans.groupBy({
       by: ['gcwinitem'],
       _count: true,
-      where: {
-        gdt: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
+      where: whereCondition,
     });
 
-    return winItemCount.length;
+    return cityCounts.map((result) => ({
+      gcwinitem: result.gcwinitem,
+      count: result._count,
+    }));
   }
 }

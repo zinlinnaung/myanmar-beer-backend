@@ -24,14 +24,14 @@ import { ExternalGuard, InternalGuard } from 'src/common/guards';
 export class CustomerController {
   constructor(private customerService: CustomerService) {}
 
-  @Get('/i/list')
-  @HttpCode(HttpStatus.OK)
-  // @UseGuards(InternalGuard)
-  @Public()
-  @ApiBearerAuth()
-  async get_all_customer_internal() {
-    return this.customerService.get_all_customer_internal();
-  }
+  // @Get('/i/list')
+  // @HttpCode(HttpStatus.OK)
+  // // @UseGuards(InternalGuard)
+  // @Public()
+  // @ApiBearerAuth()
+  // async get_all_customer_internal() {
+  //   return this.customerService.get_all_customer_internal();
+  // }
   @Get('/i/count/success')
   @HttpCode(HttpStatus.OK)
   //hello
@@ -51,17 +51,17 @@ export class CustomerController {
     return this.customerService.get_all_fail_count();
   }
 
-  @Get('/i/count/list')
-  @HttpCode(HttpStatus.OK)
-  //hello
-  // @UseGuards(InternalGuard)
-  @Public()
-  @ApiBearerAuth()
-  async get_all_customer_count() {
-    return this.customerService.get_all_customer_count();
-  }
+  // @Get('/i/count/list')
+  // @HttpCode(HttpStatus.OK)
+  // //hello
+  // // @UseGuards(InternalGuard)
+  // @Public()
+  // @ApiBearerAuth()
+  // async get_all_customer_count() {
+  //   return this.customerService.get_all_customer_count();
+  // }
 
-  @Get('/i/date-range')
+  @Get('/i/filter')
   @HttpCode(HttpStatus.OK)
   // @UseGuards(InternalGuard)
   @Public()
@@ -79,7 +79,7 @@ export class CustomerController {
       parsedEndDate,
     );
   }
-  @Get('/i/count/date-range')
+  @Get('/i/count/filter')
   @HttpCode(HttpStatus.OK)
   // @UseGuards(InternalGuard)
   @Public()
@@ -131,19 +131,19 @@ export class CustomerController {
     );
   }
 
-  @Get('/i/city-count')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(InternalGuard)
-  @ApiBearerAuth()
-  async getCityCount() {
-    return this.customerService.getCityCount();
-  }
+  // @Get('/i/city-count')
+  // @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  // @ApiBearerAuth()
+  // async getCityCount() {
+  //   return this.customerService.getCityCount();
+  // }
 
-  @Get('/i/winitem-count')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(InternalGuard)
-  @ApiBearerAuth()
-  async getWinItemCount() {
-    return this.customerService.getWinItemCount();
-  }
+  // @Get('/i/winitem-count')
+  // @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  // @ApiBearerAuth()
+  // async getWinItemCount() {
+  //   return this.customerService.getWinItemCount();
+  // }
 }

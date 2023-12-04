@@ -78,26 +78,59 @@ export class CustomerService {
     return count;
   }
 
-  async get_all_success_count() {
+  async get_all_success_count(startDate: Date | null, endDate: Date | null) {
+    let whereCondition: {
+      gdt?: { gte?: string; lte?: string };
+      gstatus?: string;
+    } = {
+      gstatus: 'success',
+    };
+
+    if (startDate !== null && endDate !== null) {
+      const adjustedEndDate = new Date(endDate);
+      adjustedEndDate.setHours(23, 59, 59, 999);
+
+      whereCondition.gdt = {
+        gte: startDate.toISOString(),
+        lte: adjustedEndDate.toISOString(),
+      };
+    }
+
     const count = await this.prisma.tbl_gtrans.count({
-      where: {
-        gstatus: 'success',
-      },
+      where: whereCondition,
       orderBy: {
         gdt: 'desc',
       },
     });
+
     return count;
   }
-  async get_all_fail_count() {
+
+  async get_all_fail_count(startDate: Date | null, endDate: Date | null) {
+    let whereCondition: {
+      gdt?: { gte?: string; lte?: string };
+      gstatus?: string;
+    } = {
+      gstatus: 'failed',
+    };
+
+    if (startDate !== null && endDate !== null) {
+      const adjustedEndDate = new Date(endDate);
+      adjustedEndDate.setHours(23, 59, 59, 999);
+
+      whereCondition.gdt = {
+        gte: startDate.toISOString(),
+        lte: adjustedEndDate.toISOString(),
+      };
+    }
+
     const count = await this.prisma.tbl_gtrans.count({
-      where: {
-        gstatus: 'failed',
-      },
+      where: whereCondition,
       orderBy: {
         gdt: 'desc',
       },
     });
+
     return count;
   }
 

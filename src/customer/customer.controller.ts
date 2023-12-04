@@ -38,8 +38,17 @@ export class CustomerController {
   // @UseGuards(InternalGuard)
   @Public()
   @ApiBearerAuth()
-  async get_all_success_count() {
-    return this.customerService.get_all_success_count();
+  async get_all_success_count(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    const parsedStartDate = startDate ? new Date(startDate) : null;
+    const parsedEndDate = endDate ? new Date(endDate) : null;
+
+    return this.customerService.get_all_success_count(
+      parsedStartDate,
+      parsedEndDate,
+    );
   }
   @Get('/i/count/failed')
   @HttpCode(HttpStatus.OK)
@@ -47,8 +56,17 @@ export class CustomerController {
   // @UseGuards(InternalGuard)
   @Public()
   @ApiBearerAuth()
-  async get_all_failed_count() {
-    return this.customerService.get_all_fail_count();
+  async get_all_failed_count(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    const parsedStartDate = startDate ? new Date(startDate) : null;
+    const parsedEndDate = endDate ? new Date(endDate) : null;
+
+    return this.customerService.get_all_fail_count(
+      parsedStartDate,
+      parsedEndDate,
+    );
   }
 
   // @Get('/i/count/list')

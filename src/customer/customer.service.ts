@@ -96,6 +96,24 @@ export class CustomerService {
     return customers;
   }
 
+  async getCityCountByDateRange(
+    startDate: Date,
+    endDate: Date,
+  ): Promise<number> {
+    const cityCounts = await this.prisma.tbl_gtrans.groupBy({
+      by: ['olcity'],
+      _count: true,
+      where: {
+        gdt: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+    });
+
+    return cityCounts.length;
+  }
+
   async getCityCount(): Promise<{ olcity: string; count: number }[]> {
     const cityCounts = await this.prisma.tbl_gtrans.groupBy({
       by: ['olcity'],
@@ -118,5 +136,22 @@ export class CustomerService {
       gcwinitem: result.gcwinitem,
       count: result._count,
     }));
+  }
+  async getWinItemCountByDateRange(
+    startDate: Date,
+    endDate: Date,
+  ): Promise<number> {
+    const winItemCount = await this.prisma.tbl_gtrans.groupBy({
+      by: ['gcwinitem'],
+      _count: true,
+      where: {
+        gdt: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+    });
+
+    return winItemCount.length;
   }
 }

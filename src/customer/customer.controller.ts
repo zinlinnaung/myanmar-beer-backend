@@ -98,6 +98,39 @@ export class CustomerController {
     );
   }
 
+  @Public()
+  @Get('/i/filter/city-count')
+  @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getCityCountByDateRange(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    const parsedStartDate = startDate ? new Date(startDate) : null;
+    const parsedEndDate = endDate ? new Date(endDate) : null;
+    return this.customerService.getCityCountByDateRange(
+      parsedStartDate,
+      parsedEndDate,
+    );
+  }
+  @Public()
+  @Get('/i/filter/winitem-count')
+  @HttpCode(HttpStatus.OK)
+  // @UseGuards(InternalGuard)
+  @ApiBearerAuth()
+  async getWinItemCountByDateRange(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    const parsedStartDate = startDate ? new Date(startDate) : null;
+    const parsedEndDate = endDate ? new Date(endDate) : null;
+    return this.customerService.getWinItemCountByDateRange(
+      parsedStartDate,
+      parsedEndDate,
+    );
+  }
+
   @Get('/i/city-count')
   @HttpCode(HttpStatus.OK)
   @UseGuards(InternalGuard)
